@@ -1,0 +1,18 @@
+class Solution:
+    # @param A : string
+    # @return an integer
+    def seats(self, A):
+        MOD = 10**7 + 3
+        occupied_seats = [i for i, seat in enumerate(A) if seat == 'x']
+        num_occupied = len(occupied_seats)
+        
+        if num_occupied <= 1:
+            return 0
+        
+        median_index = occupied_seats[num_occupied // 2]
+        total_jumps = 0
+        
+        for i in range(num_occupied):
+            total_jumps = (total_jumps + abs(occupied_seats[i] - median_index) - abs(i - num_occupied // 2)) % MOD
+        
+        return total_jumps
